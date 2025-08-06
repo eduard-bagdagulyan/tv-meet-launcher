@@ -8,7 +8,7 @@ const port = 8080;
 app.use(express.urlencoded({extended: true}));
 app.use(express.static('public'));
 app.use((req, res, next) => console.log(req.method, req.url, 'request received') || next())
-await showIdleScreen();
+showIdleScreen();
 
 let activeContext = null;  // browser context reference
 let activePage = null;     // page reference
