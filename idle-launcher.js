@@ -1,0 +1,22 @@
+const {chromium} = require('playwright');
+
+async function showIdleScreen() {
+    const context = await chromium.launch({
+        headless: false,
+        args: [
+            '--start-maximized',
+            '--kiosk',
+            '--use-fake-ui-for-media-stream',
+            '--no-sandbox',
+            '--disable-dev-shm-usage',
+            '--disable-extensions',
+            '--disable-infobars',
+            '--disable-notifications',
+        ],
+    });
+
+    const page = await context.newPage();
+    await page.goto('http://localhost:8080/idle.html');
+}
+
+module.exports = {showIdleScreen};

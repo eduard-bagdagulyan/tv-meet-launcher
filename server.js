@@ -1,6 +1,7 @@
 const express = require('express');
 const {exec} = require('child_process');
-const { launchMeet } = require('./meet-launcher');
+const {launchMeet} = require('./meet-launcher');
+const {showIdleScreen} = require("./idle-launcher");
 
 const app = express();
 const port = 8080;
@@ -60,7 +61,7 @@ app.get('/reset', async (req, res) => {
     activeContext = null;
 
     exec('killall chrome');
-    exec(`chromium --kiosk "http://localhost:${port}/idle.html"`);
+    await showIdleScreen()
     res.send('✅ TV reset to idle screen');
 });
 
