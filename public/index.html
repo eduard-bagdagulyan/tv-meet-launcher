@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Send Google Meet to TV</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            font-family: sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        input, button {
+            padding: 10px;
+            margin: 10px;
+        }
+
+        /* Top notification banner */
+        #status {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: #323232;
+            color: white;
+            padding: 12px;
+            font-size: 16px;
+            transform: translateY(-100%);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+        #status.show {
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+<h2>📺 Send a Google Meet Link to the TV</h2>
+<form id="joinForm">
+    <input type="text" id="meetUrl" placeholder="https://meet.google.com/..." size="50" required />
+    <br>
+    <button type="submit">Start Meeting</button>
+</form>
+
+<hr style="margin: 40px 0;">
+
+<h3>🛑 Disconnect TV from Meeting</h3>
+<button id="resetBtn" style="background:red;color:white;">Disconnect TV from Screen</button>
+
+<div id="status"></div>
+
+<script>
+    const joinForm = document.getElementById('joinForm');
+    const resetBtn = document.getElementById('resetBtn');
+    const statusDiv = document.getElementById('status');
+
+    function showStatus(msg) {
+        statusDiv.textContent = msg;
+        statusDiv.classList.add('show');
+        setTimeout(() => {
+            statusDiv.classList.remove('show');
+        }, 1200);
+    }
+
+    joinForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const url = document.getElementById('meetUrl').value;
+        const response = await fetch('/join', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            body: new URLSearchParams({ url })
+        });
+        const text = await response.text();
+        showStatus(text);
+    });
+
+    resetBtn.addEventListener('click', async () => {
+        const response = await fetch('/reset');
+        const text = await response.text();
+        showStatus(text);
+    });
+</script>
+</body>
+</html>
