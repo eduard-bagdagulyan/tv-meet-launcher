@@ -15,7 +15,8 @@ async function launchMeet(url) {
             '--disable-infobars',
             '--disable-notifications',
         ],
-        viewport: null
+        viewport: null,
+        ignoreDefaultArgs: ['--enable-automation']
     });
 
     const page = await browser.newPage();
@@ -26,7 +27,7 @@ async function launchMeet(url) {
         console.error('❌ Could not join the meeting — no join button appeared');
     }
 
-    return { browser, page };
+    return {browser, page};
 }
 
 async function waitAndClickJoinButton(page, timeoutMs = 30000) {

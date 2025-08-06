@@ -3,7 +3,7 @@ const {chromium} = require('playwright');
 const USER_DATA_DIR = './google-profile';
 
 async function showIdleScreen() {
-    const context = await chromium.launchPersistentContext(USER_DATA_DIR,{
+    const context = await chromium.launchPersistentContext(USER_DATA_DIR, {
         headless: false,
         args: [
             '--start-maximized',
@@ -15,7 +15,8 @@ async function showIdleScreen() {
             '--disable-infobars',
             '--disable-notifications',
         ],
-        viewport: null
+        viewport: null,
+        ignoreDefaultArgs: ['--enable-automation']
     });
 
     const page = await context.newPage();
