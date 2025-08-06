@@ -21,12 +21,26 @@ async function launchMeet(url) {
     await page.waitForTimeout(8000);
 
     try {
-        const joinBtn = await page.locator('text="Join now"').first();
-        await joinBtn.click();
-        console.log('✅ Joined the meeting!');
-    } catch (err) {
-        console.error('❌ Failed to click Join now:', err);
+        const joinNowBtn = await page.locator('text="Join now"').first();
+        if (await joinNowBtn.isVisible()) {
+            await joinNowBtn.click();
+            console.log('✅ Joined the meeting via "Join now"');
+            return;
+        }
+    } catch (_) {
     }
+
+    try {
+        const askToJoinBtn = await page.locator('text="Ask to join"').first();
+        if (await askToJoinBtn.isVisible()) {
+            await askToJoinBtn.click();
+            console.log('✅ Clicked "Ask to join" – waiting for approval');
+            return;
+        }
+    } catch (_) {
+    }
+
+    console.error('❌ Neither "Join now" nor "Ask to join" was found.');
 }
 
 module.exports = {launchMeet};
