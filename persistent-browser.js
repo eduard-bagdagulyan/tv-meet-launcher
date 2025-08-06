@@ -41,7 +41,7 @@ async function waitAndClickJoinButton(page, timeoutMs = 30000) {
             return true;
         }
 
-        await page.waitForTimeout(500);
+        await page.waitForTimeout(100);
     }
 
     console.warn('⚠️ Timed out waiting for Join button');
