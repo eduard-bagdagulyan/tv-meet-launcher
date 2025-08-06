@@ -16,9 +16,7 @@ async function launchMeet(url) {
 
     const page = await browser.newPage();
     await page.goto(url);
-
-    // Wait for the page to fully render
-    await page.waitForTimeout(8000);
+    // await page.waitForTimeout(8000);
 
     try {
         const joinNowBtn = await page.locator('text="Join now"').first();
@@ -31,16 +29,24 @@ async function launchMeet(url) {
     }
 
     try {
-        const askToJoinBtn = await page.locator('text="Ask to join"').first();
-        if (await askToJoinBtn.isVisible()) {
-            await askToJoinBtn.click();
-            console.log('✅ Clicked "Ask to join" – waiting for approval');
-            return;
+        const joinNowBtn = await page.locator('text="Join now"').first();
+        if (await joinNowBtn.isVisible()) {
+            await joinNowBtn.click();
+            console.log('✅ Joined via "Join now"');
+        } else {
+            const askToJoinBtn = await page.locator('text="Ask to join"').first();
+            if (await askToJoinBtn.isVisible()) {
+                await askToJoinBtn.click();
+                console.log('✅ Clicked "Ask to join"');
+            } else {
+                console.warn('⚠️ No Join button found');
+            }
         }
-    } catch (_) {
+    } catch (err) {
+        console.warn('⚠️ Could not click Join button:', err);
     }
 
-    console.error('❌ Neither "Join now" nor "Ask to join" was found.');
+    return { browser, page };
 }
 
 module.exports = {launchMeet};
