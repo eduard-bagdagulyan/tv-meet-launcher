@@ -11,7 +11,8 @@ async function launchMeet(url) {
             '--use-fake-ui-for-media-stream',
             '--no-sandbox',
             '--disable-dev-shm-usage',
-        ]
+        ],
+        viewport: null
     });
 
     const page = await browser.newPage();

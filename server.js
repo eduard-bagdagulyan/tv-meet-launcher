@@ -41,7 +41,7 @@ app.get('/reset', async (req, res) => {
             if (await leaveBtn.isVisible()) {
                 await leaveBtn.click();
                 console.log('✅ Clicked "Leave call"');
-                await activePage.waitForTimeout(2000);
+                await activePage.waitForTimeout(500);
             } else {
                 console.warn('⚠️ Leave button not found');
             }
