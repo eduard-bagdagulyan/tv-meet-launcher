@@ -30,8 +30,8 @@ app.post('/join', async (req, res) => {
 
 // Reset to idle screen
 app.get('/reset', (req, res) => {
-    exec('pkill chromium-browser');
-    exec(`chromium-browser --kiosk "http://localhost:${port}/idle.html"`);
+    exec('kilall chrome');
+    exec(`chromium --kiosk "http://localhost:${port}/idle.html"`);
     res.send('✅ TV reset to idle screen');
 });
 
