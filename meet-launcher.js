@@ -1,9 +1,12 @@
 const {chromium} = require('playwright');
 
+const USER_DATA_DIR = './google-profile';
+
 async function launchMeet(url) {
-    const browser = await chromium.launch({
+    const browser = await chromium.launchPersistentContext(USER_DATA_DIR, {
         headless: false,
         args: [
+            '--start-maximized',
             '--kiosk',
             '--use-fake-ui-for-media-stream',
             '--no-sandbox',
@@ -11,11 +14,7 @@ async function launchMeet(url) {
         ]
     });
 
-    const context = await browser.newContext({
-        permissions: ['microphone', 'camera'],
-    });
-
-    const page = await context.newPage();
+    const page = await browser.newPage();
     await page.goto(url);
 
     // Wait for the page to fully render
