@@ -1,12 +1,72 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>TV Idle</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8" />
+    <title>TV is Idle</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+        :root {
+            --brand-main: #0090ff;
+            --text-white: #ffffff;
+        }
+
+        body {
+            margin: 0;
+            height: 100vh;
+            background-color: var(--brand-main);
+            color: var(--text-white);
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 5em;
+            font-weight: 900;
+            margin: 0.2em 0;
+        }
+
+        p {
+            font-size: 2.5em;
+            font-weight: 600;
+            margin-bottom: 1em;
+            opacity: 0.95;
+        }
+
+        img {
+            width: 360px;
+            height: 360px;
+            border-radius: 16px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        img:hover {
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 3em;
+            }
+
+            p {
+                font-size: 1.5em;
+            }
+
+            img {
+                width: 250px;
+                height: 250px;
+            }
+        }
+    </style>
 </head>
-<body style="display:flex;flex-direction:column;justify-content:center;align-items:center;height:100vh;font-family:sans-serif;">
+<body>
 <h1>📺 TV is Idle</h1>
-<p>Scan the QR code to start a meeting</p>
-<img src="qr.png" alt="QR Code" width="250">
+<p>Scan to connect to a meeting</p>
+<img src="qr.png" alt="QR Code">
 </body>
 </html>
