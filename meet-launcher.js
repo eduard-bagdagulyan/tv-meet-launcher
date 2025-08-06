@@ -26,16 +26,6 @@ async function launchMeet(url) {
         const joinNowBtn = await page.locator('text="Join now"').first();
         if (await joinNowBtn.isVisible()) {
             await joinNowBtn.click();
-            console.log('✅ Joined the meeting via "Join now"');
-            return;
-        }
-    } catch (_) {
-    }
-
-    try {
-        const joinNowBtn = await page.locator('text="Join now"').first();
-        if (await joinNowBtn.isVisible()) {
-            await joinNowBtn.click();
             console.log('✅ Joined via "Join now"');
         } else {
             const askToJoinBtn = await page.locator('text="Ask to join"').first();
