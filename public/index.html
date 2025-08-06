@@ -1,50 +1,149 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Send Google Meet to TV</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        body {
-            font-family: sans-serif;
-            text-align: center;
-            margin-top: 50px;
-        }
-        input, button {
-            padding: 10px;
-            margin: 10px;
+        :root {
+            --brand-main: #0090ff;
+            --brand-hover: #1c89ff;
+            --brand-dark: #1a1d3e;
+            --text-white: #ffffff;
+            --danger: #f83843;
+            --light-gray: #f6f6f7;
         }
 
-        /* Top notification banner */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--light-gray);
+            color: var(--brand-dark);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            color: var(--brand-dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        form {
+            width: 100%;
+            max-width: 500px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 40px;
+        }
+
+        input[type="text"] {
+            padding: 14px 16px;
+            font-size: 1rem;
+            border: 2px solid var(--brand-main);
+            border-radius: 8px;
+            outline: none;
+        }
+
+        input[type="text"]:focus {
+            border-color: var(--brand-hover);
+        }
+
+        button {
+            padding: 14px 16px;
+            font-size: 1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button[type="submit"] {
+            background-color: var(--brand-main);
+            color: var(--text-white);
+        }
+
+        button[type="submit"]:hover {
+            background-color: var(--brand-hover);
+        }
+
+        #resetBtn {
+            background-color: var(--danger);
+            color: var(--text-white);
+            max-width: 500px;
+            width: 100%;
+        }
+
+        #resetBtn:hover {
+            opacity: 0.9;
+        }
+
+        hr {
+            width: 100%;
+            max-width: 500px;
+            margin: 40px 0;
+            border: none;
+            height: 1px;
+            background-color: #ddd;
+        }
+
         #status {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background: #323232;
+            background-color: var(--brand-dark);
             color: white;
-            padding: 12px;
-            font-size: 16px;
+            text-align: center;
+            padding: 14px;
+            font-size: 1rem;
+            font-weight: 500;
             transform: translateY(-100%);
             transition: transform 0.3s ease;
             z-index: 1000;
         }
+
         #status.show {
             transform: translateY(0);
+        }
+
+        @media (min-width: 768px) {
+            h2 {
+                font-size: 2.2rem;
+            }
+
+            input[type="text"], button {
+                font-size: 1.1rem;
+            }
         }
     </style>
 </head>
 <body>
-<h2>📺 Send a Google Meet Link to the TV</h2>
+
+<h2>📺 Send Meet Link to TV</h2>
+
 <form id="joinForm">
-    <input type="text" id="meetUrl" placeholder="https://meet.google.com/..." size="50" required />
-    <br>
+    <input type="text" id="meetUrl" placeholder="https://meet.google.com/..." required />
     <button type="submit">Start Meeting</button>
 </form>
 
-<hr style="margin: 40px 0;">
+<hr>
 
-<h3>🛑 Disconnect TV from Meeting</h3>
-<button id="resetBtn" style="background:red;color:white;">Disconnect TV from Screen</button>
+<h3 style="margin-bottom: 12px;">🛑 Disconnect TV from Meeting</h3>
+<button id="resetBtn">Disconnect TV from Screen</button>
 
 <div id="status"></div>
 
@@ -58,7 +157,7 @@
         statusDiv.classList.add('show');
         setTimeout(() => {
             statusDiv.classList.remove('show');
-        }, 1200);
+        }, 1500);
     }
 
     joinForm.addEventListener('submit', async (e) => {
