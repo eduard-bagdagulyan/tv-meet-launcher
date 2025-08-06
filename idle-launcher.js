@@ -13,6 +13,7 @@ async function showIdleScreen() {
             '--disable-infobars',
             '--disable-notifications',
         ],
+        viewport: null
     });
 
     const page = await context.newPage();
