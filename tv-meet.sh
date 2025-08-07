@@ -1,6 +1,7 @@
 #!/bin/bash
 
 #waiting for WiFi to connect
+echo "🕑 Waiting 10s for Wi-Fi to connect"
 sleep 10s
 
 # CONFIGURATION
