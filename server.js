@@ -1,6 +1,5 @@
 const express = require('express');
 const {launchPersistentContext, waitAndClickJoinButton} = require('./persistent-browser');
-const path = require('path');
 
 const app = express();
 const port = 8080;

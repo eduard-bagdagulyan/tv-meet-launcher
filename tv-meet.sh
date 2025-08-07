@@ -5,7 +5,7 @@ echo "🕑 Waiting 10s for Wi-Fi to connect"
 sleep 10s
 
 # CONFIGURATION
-APP_DIR="/home/psycho/tv-meet-launcher"             # Replace with your actual project path
+APP_DIR="/home/psycho/tv-meet-launcher"
 QR_FILE="$APP_DIR/public/qr.png"
 PORT=8080
 
