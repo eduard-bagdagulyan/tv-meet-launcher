@@ -1,5 +1,8 @@
 #!/bin/bash
 
+#waiting for WiFi to connect
+sleep 10s
+
 # CONFIGURATION
 APP_DIR="/home/psycho/tv-meet-launcher"             # Replace with your actual project path
 QR_FILE="$APP_DIR/public/qr.png"
