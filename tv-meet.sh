@@ -10,7 +10,7 @@ PORT=8080
 
 # 1. Get local IP (for QR code)
 IP=$(hostname -I | awk '{print $1}')
-CONTROL_URL="https://$IP:$PORT"
+CONTROL_URL="http://$IP:$PORT"
 
 # 2. Generate QR code
 echo "🔧 Generating QR code for $CONTROL_URL"
