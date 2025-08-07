@@ -17,10 +17,25 @@ let page = null;
     await page.goto(`http://localhost:${port}/idle.html`);
 })();
 
+// Helper to parse URL or meet code
+function parseMeetInput(input) {
+    const meetCodeRegex = /^[a-z]{3}-[a-z]{4}-[a-z]{3}$/i;
+
+    if (input.startsWith('https://meet.google.com/')) {
+        return input;
+    } else if (meetCodeRegex.test(input)) {
+        return `https://meet.google.com/${input}`;
+    } else {
+        return null;
+    }
+}
+
 app.post('/join', async (req, res) => {
-    const meetUrl = req.body.url;
-    if (!meetUrl || !meetUrl.startsWith('https://meet.google.com/')) {
-        return res.send('❌ Invalid Google Meet URL');
+    const userInput = req.body.url;
+    const meetUrl = parseMeetInput(userInput);
+
+    if (!meetUrl) {
+        return res.send('❌ Invalid Google Meet URL or Code');
     }
 
     try {
